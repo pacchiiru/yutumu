@@ -34,19 +34,19 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YutumuPanelSelectors.SORT_PLAYLIST_BUTTON,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "One feature that can help us the \"Sort Playlist\" button.",
+                    intro: "One useful feature is the \"Sort Playlist\" button.",
                     position: IntroPositions.LEFT,
                 },
                 {
                     element: YutumuPanelSelectors.SORT_PLAYLIST_BUTTON,
                     muuStepStart: MuuSteps.EXCITED,
-                    intro: "When clicked, this button will sort all your songs by artist, then song title.",
+                    intro: "When clicked, this button will sort all songs by artist, then song title.",
                     position: IntroPositions.LEFT,
                 },
                 {
                     element: YouTubeSelectors.PLAYLIST_CONTROLS,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "You'll also notice that all your songs will have a static-y border applied to them, moo.",
+                    intro: "You'll also notice that all songs will have a static-y border applied to them, moo.",
                     position: IntroPositions.BOTTOM,
                 },
                 {
