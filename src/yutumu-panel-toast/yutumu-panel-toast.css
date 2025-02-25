@@ -1,0 +1,45 @@
+.toast {
+  /*Positioning stuff*/
+  position: fixed;
+  z-index: 11000;
+  /*Box model stuff*/
+  padding: 0.6rem 1.2rem;
+  border: 0.2rem solid #ffffff80;
+  border-radius: 0.6rem;
+  background: #ffffffe6;
+  /*Typography stuff*/
+  font-family: 'Sour Gummy', sans-serif;
+  font-size: 1.6rem;
+  color: #171717;
+  /*Manipulations stuff*/
+  filter: url(#wavyslow);
+  animation: toast-in 6s forwards, toast-out 3s forwards 3s;
+  opacity: 0;
+}
+
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(1.2rem);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0.6rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

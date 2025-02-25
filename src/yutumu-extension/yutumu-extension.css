@@ -1,0 +1,31 @@
+body {
+    /*Box model stuff*/
+    min-width: 12.5rem;
+    min-height: 12.5rem;
+    margin: 1.2rem;
+    padding: 0.6rem;
+    background-color: #f7f7f7;
+    /*Typography stuff*/
+    font-family: 'Sour Gummy', sans-serif;
+    color: #171717;
+}
+
+button {
+    /*Box model stuff*/
+    width: 100%;
+    padding: 0.6rem 1.0rem;
+    border: none;
+    border-radius: 0.4rem;
+    background-color: #ffffff;
+    /*Typography stuff*/
+    font-family: 'Sour Gummy', sans-serif;
+    font-size: 1.4rem;
+    /*Miscellaneous*/
+    cursor: pointer;
+    box-shadow: 0 0.1rem 0.4rem #0000004d;
+}
+
+button:hover {
+    /*Box model stuff*/
+    background-color: #eaeaea;
+}
