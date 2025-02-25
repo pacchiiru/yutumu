@@ -15,3 +15,7 @@ export function getElementOffsetHeight(selector: string): number {
 export function getScrollbarWidth(): number {
     return window.innerWidth - document.documentElement.clientWidth;
 }
+
+export function getAttributeValue(item: Element, attribute: string): string {
+    return item.getAttribute(attribute) || "";
+}

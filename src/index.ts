@@ -18,6 +18,7 @@ import './const/yutumu-panel-constants';
 import './const/yutumu-panel-toast-actions';
 import './const/yutumu-panel-toast-messages';
 import './const/yutumu-panel-selectors';
+import './const/yutumu-sort-playlist-types';
 // ----------------------------------------
 // Import Utilities
 // ----------------------------------------
