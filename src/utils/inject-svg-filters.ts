@@ -1,5 +1,3 @@
-// Inject SVG filters into the document
-
 import panelSvgFiltersTemplate from './svg-filters.html';
 
 export function injectSvgFilters(): void {

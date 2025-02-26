@@ -12,6 +12,7 @@
 import './const/youtube-selectors';
 import './const/youtube-url-patterns';
 import './const/yutumu-intro-positions';
+import './const/yutumu-log-messages';
 import './const/yutumu-muu-sounds';
 import './const/yutumu-muu-steps';
 import './const/yutumu-panel-constants';

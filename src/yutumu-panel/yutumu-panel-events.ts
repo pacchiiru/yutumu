@@ -8,7 +8,7 @@ import { startTutorial } from '../yutumu-intro/yutumu-intro';
 import { showToastOverElement } from '../yutumu-panel-toast/yutumu-panel-toast';
 import { sortPlaylist } from '../yutumu/sort-playlist';
 
-// Set up draggable behavior on the panel
+// Drag Panel
 export function setupDragAndDrop(panel: HTMLElement, header: HTMLElement): void {
   interact(header).draggable({
     listeners: {
@@ -21,9 +21,11 @@ export function setupDragAndDrop(panel: HTMLElement, header: HTMLElement): void 
         panel.setAttribute('data-x', x.toString());
         panel.setAttribute('data-y', y.toString());
       },
+
       start() {
         document.body.style.userSelect = 'none';
       },
+
       end() {
         document.body.style.userSelect = '';
       }
@@ -31,7 +33,7 @@ export function setupDragAndDrop(panel: HTMLElement, header: HTMLElement): void 
   });
 }
 
-// Set up resizable behavior on the panel
+// Resize Panel
 export function setupResizable(panel: HTMLElement): void {
   interact(panel).resizable({
     edges: { left: true, right: true, bottom: true, top: true },
@@ -40,7 +42,6 @@ export function setupResizable(panel: HTMLElement): void {
         const target = event.target as HTMLElement;
         target.style.width = `${event.rect.width}px`;
         target.style.height = `${event.rect.height}px`;
-
         let x = parseFloat(target.getAttribute('data-x') || "0");
         let y = parseFloat(target.getAttribute('data-y') || "0");
         x += event.deltaRect.left;
@@ -49,9 +50,11 @@ export function setupResizable(panel: HTMLElement): void {
         target.setAttribute('data-x', x.toString());
         target.setAttribute('data-y', y.toString());
       },
+
       start() {
         document.body.style.userSelect = 'none';
       },
+
       end() {
         document.body.style.userSelect = '';
       }
@@ -66,10 +69,9 @@ export function setupResizable(panel: HTMLElement): void {
   });
 }
 
-// Bind UI button events on the panel
 export function bindUIButtonActions(panel: HTMLElement): void {
 
-  // Help button
+  // Click Help
   const helpButton = panel.querySelector('#yutumu-help-button') as HTMLElement | null;
   if (helpButton) {
     helpButton.addEventListener('click', () => {
@@ -77,23 +79,20 @@ export function bindUIButtonActions(panel: HTMLElement): void {
     });
   }
 
-  // Minimize button
+  // Click Minimize
   const minimizeButton = panel.querySelector('#yutumu-minimize-button') as HTMLElement | null;
   if (minimizeButton) {
     minimizeButton.addEventListener('click', () => {
+
+      // Positioning: right side, below navbar
       const minimizePanelWidth = YutumuPanelConstants.MIN_WIDTH;
       const minimizePanelHeight = YutumuPanelConstants.MIN_HEIGHT;
-
-      // Position on right side of webpage
       const minimizeTargetX = window.innerWidth - (minimizePanelWidth + getScrollbarWidth() + YutumuPanelConstants.POS_PADDING);
-
-      // Position under the navbar
       const minimizeTargetY = getElementOffsetHeight(YouTubeSelectors.NAVBAR) + YutumuPanelConstants.POS_PADDING;
-
       const computedStyle = window.getComputedStyle(panel);
       panel.style.setProperty('--initial-transform', computedStyle.transform);
-
       panel.classList.add('minimizing-out');
+
       showToastOverElement(ToastActions.MINIMIZE, panel);
 
       panel.addEventListener('animationend', function outHandler(e: AnimationEvent) {
@@ -120,13 +119,15 @@ export function bindUIButtonActions(panel: HTMLElement): void {
     });
   }
 
-  // Close button
+  // Click Close
   const closeButton = panel.querySelector('#yutumu-close-button') as HTMLElement | null;
   if (closeButton) {
     closeButton.addEventListener('click', () => {
       const computedStyle = window.getComputedStyle(panel);
       panel.style.setProperty('--initial-transform', computedStyle.transform);
+
       showToastOverElement(ToastActions.CLOSE, panel);
+
       panel.classList.add('closing');
       panel.addEventListener('animationend', () => {
         panel.remove();
@@ -134,7 +135,7 @@ export function bindUIButtonActions(panel: HTMLElement): void {
     });
   }
 
-  // Sort button
+  // Click Sort Playlist
   const sortButton = panel.querySelector('#yutumu-sort-playlist-button') as HTMLElement | null;
   if (sortButton) {
     sortButton.addEventListener('click', () => {

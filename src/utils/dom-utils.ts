@@ -1,4 +1,6 @@
-// Utility functions for DOM manipulation
+export function getAttributeValue(item: Element, attribute: string): string {
+    return item.getAttribute(attribute) || "";
+}
 
 export function getElementOffsetWidth(selector: string): number {
     const el = document.querySelector(selector) as HTMLElement | null;
@@ -14,8 +16,4 @@ export function getElementOffsetHeight(selector: string): number {
 
 export function getScrollbarWidth(): number {
     return window.innerWidth - document.documentElement.clientWidth;
-}
-
-export function getAttributeValue(item: Element, attribute: string): string {
-    return item.getAttribute(attribute) || "";
 }

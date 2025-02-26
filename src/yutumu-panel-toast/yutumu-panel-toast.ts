@@ -1,7 +1,6 @@
 import { ToastAction } from '../const/yutumu-panel-toast-actions';
 import { ToastMessages } from '../const/yutumu-panel-toast-messages';
 
-// Display toast message over target element
 export function showToastOverElement(action: ToastAction, targetElement: HTMLElement): void {
   const messages = ToastMessages[action];
   if (!messages.length) return;

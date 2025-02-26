@@ -15,13 +15,11 @@ export class YutumuPanel {
     injectSvgFilters();
   }
 
-  // Create and initialize panel
   public createPanel(): void {
 
     // Prevent duplicate panel
     if (document.getElementById('yutumu')) return;
 
-    // Create panel
     const panel = document.createElement('div');
     panel.id = 'yutumu';
     panel.className = 'yutumu-panel';
@@ -30,23 +28,19 @@ export class YutumuPanel {
     document.body.appendChild(panel);
     this.panelElement = panel;
 
-    // Place panel next to page sidebar and below navbar
+    // Positioning: next to sidebar, below navbar
     const openTargetX = getElementOffsetWidth(YouTubeSelectors.SIDEBAR) + YutumuPanelConstants.POS_PADDING;
     const openTargetY = getElementOffsetHeight(YouTubeSelectors.NAVBAR) + YutumuPanelConstants.POS_PADDING;
     panel.style.transform = `translate(${openTargetX}px, ${openTargetY}px)`;
     panel.setAttribute('data-x', `${openTargetX}`);
     panel.setAttribute('data-y', `${openTargetY}`);
 
-    // Initialize draggable behavior
+    // Initialize panel drag, resize, and button clicks
     const header = panel.querySelector('.yutumu-panel-header') as HTMLElement | null;
     if (header) {
       setupDragAndDrop(panel, header);
     }
-
-    // Initialize resizable behavior
     setupResizable(panel);
-
-    // Bind UI button events
     bindUIButtonActions(panel);
 
     // Open animation
@@ -62,7 +56,7 @@ export class YutumuPanel {
     });
   }
 
-  // Initialize the panel, set up messaging to recreate if needed
+  // Reopen Panel
   public static init(): void {
     const yutumuPanel = new YutumuPanel();
     yutumuPanel.createPanel();
@@ -76,11 +70,8 @@ export class YutumuPanel {
 
 function updatePanelContext() {
   const url = window.location.href;
-
-  // Determine the current page context
   const isPlaylistPage = YouTubeUrlPatterns.PLAYLIST.test(url);
   const isHomePage = YouTubeUrlPatterns.HOME.test(url);
-  // Get all context-based elements
   const elements = document.querySelectorAll("[data-context]");
 
   elements.forEach((element) => {
@@ -91,7 +82,6 @@ function updatePanelContext() {
 
     const isCurrentlyVisible = !element.classList.contains("fadeOut");
 
-    // Only animate if visibility state is changing
     if (shouldBeVisible && !isCurrentlyVisible) {
       element.classList.remove("fadeOut");
       element.classList.add("fadeIn");
@@ -103,8 +93,6 @@ function updatePanelContext() {
   });
 }
 
-
-// Ensure script runs properly on page load
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
     updatePanelContext();

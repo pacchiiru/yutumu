@@ -1,21 +1,19 @@
 import { YouTubeSelectors } from '../const/youtube-selectors';
 import { YutumuSortPlaylistTypes } from '../const/yutumu-sort-playlist-types';
+import { YutumuLogMessages } from '../const/yutumu-log-messages';
 import { getAttributeValue } from '../utils/dom-utils';
 
 export function sortPlaylist(sortType: YutumuSortPlaylistTypes = YutumuSortPlaylistTypes.BY_ARTIST_AND_TITLE): void {
-  const container = document.querySelector(YouTubeSelectors.PLAYLIST);
 
+  const container = document.querySelector(YouTubeSelectors.PLAYLIST);
   if (!container) {
-    console.warn('Yutumu: Cannot find playlist container.');
+    console.warn(`${YutumuLogMessages.LOG_PREFIX} Cannot find playlist container.`);
     return;
   }
 
-  const playlistItems: Element[] = Array.from(
-    container.querySelectorAll(YouTubeSelectors.PLAYLIST_SONG)
-  );
-
+  const playlistItems: Element[] = Array.from(container.querySelectorAll(YouTubeSelectors.PLAYLIST_SONG));
   if (playlistItems.length === 0) {
-    console.warn('Yutumu: No playlist items found.');
+    console.warn(`${YutumuLogMessages.LOG_PREFIX} No playlist items found.`);
     return;
   }
 
@@ -24,6 +22,7 @@ export function sortPlaylist(sortType: YutumuSortPlaylistTypes = YutumuSortPlayl
   const TITLE_ATTRIBUTE = "title";
 
   if (sortType === YutumuSortPlaylistTypes.BY_ARTIST_AND_TITLE) {
+
     playlistItems.sort((a, b) => {
       const artistAElement = a.querySelector(SONG_ARTIST_SELECTOR);
       const artistBElement = b.querySelector(SONG_ARTIST_SELECTOR);
