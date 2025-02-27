@@ -77,7 +77,7 @@ Yutumu does **not** share, sell, or transmit your data to any external servers. 
 
 Planned features include:
 
-- **intro.js Help**  
+- **Intro.js Help**  
   - Step-by-step contextual guides to help navigate Yutumu’s features
 
 - **Additional Playlist Sorting**
