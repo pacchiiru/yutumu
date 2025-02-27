@@ -1,0 +1,22 @@
+.sorted-item-highlight {
+    /*Positioning stuff*/
+    position: relative;
+}
+
+.sorted-item-highlight::before {
+    /*Display stuff*/
+    content: "";
+    /*Positioning stuff*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*Box model stuff*/
+    border: 0.2rem solid #ffffff80;
+    border-radius: 0.7rem;
+    /*Manipulations stuff*/
+    filter: url(#wavyfast);
+    /*Miscellaneous*/
+    pointer-events: none;
+}

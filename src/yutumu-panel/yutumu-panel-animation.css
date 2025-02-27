@@ -1,0 +1,109 @@
+@keyframes yutumu-panel-open {
+  0% {
+    opacity: 0;
+    transform: var(--initial-transform, translate(0rem, 0rem)) translateY(1.2rem) scale(0.8) rotate(-5deg);
+    filter: blur(0.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: var(--initial-transform, translate(0rem, 0rem));
+    filter: blur(0rem);
+  }
+}
+
+.yutumu-panel.opening {
+  /*Manipulations stuff*/
+  animation: yutumu-panel-open 0.8s forwards ease-out;
+}
+
+@keyframes minimize-out {
+  0% {
+    opacity: 1;
+    transform: var(--initial-transform, none);
+    filter: blur(0rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: var(--initial-transform, none) translateY(-1.2rem) scale(1.2);
+    filter: blur(0.2rem);
+  }
+}
+
+@keyframes minimize-in {
+  0% {
+    opacity: 0;
+    transform: var(--target-transform, none) translateY(1.2rem) scale(0.8);
+    filter: blur(0.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: var(--target-transform, none);
+    filter: blur(0rem);
+  }
+}
+
+.yutumu-panel.minimizing-out {
+  /*Manipulations stuff*/
+  animation: minimize-out 0.8s forwards ease-out;
+}
+
+.yutumu-panel.minimizing-in {
+  /*Manipulations stuff*/
+  animation: minimize-in 0.8s forwards ease-out;
+}
+
+@keyframes dissipate {
+  0% {
+    opacity: 1;
+    transform: var(--initial-transform, none);
+    filter: blur(0rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: var(--initial-transform, none) translateY(-1.2rem) scale(1.2) rotate(10deg);
+    filter: blur(0.2rem);
+  }
+}
+
+.yutumu-panel.closing {
+  /*Manipulations stuff*/
+  animation: dissipate 0.8s forwards ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeIn {
+  /*Manipulations stuff*/
+  animation: fadeIn 0.8s ease-out;
+  opacity: 1;
+}
+
+.fadeOut {
+  /*Manipulations stuff*/
+  animation: fadeOut 0.8s ease-out;
+  opacity: 0;
+  /*Miscellaneous*/
+  pointer-events: none;
+}
