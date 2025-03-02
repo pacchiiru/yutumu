@@ -1,0 +1,265 @@
+.yutumu-panel {
+/*Positioning stuff*/
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+/*Box model stuff*/
+  width: 30.0rem;
+  height: 60.0rem;
+  border-radius: 0.7rem;
+/*Miscellaneous*/
+  overflow: hidden;
+}
+
+/* Necessary properties for SVG filter to be applied correctly */
+.yutumu-panel::before {
+/*Display stuff*/
+  content: "";
+/*Positioning stuff*/
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+/*Box model stuff*/
+  border: 0.2rem solid #ffffff80;
+  border-radius: inherit;
+/*Manipulations stuff*/
+  filter: url(#wavyfast);
+/*Miscellaneous*/
+  pointer-events: none;
+}
+
+.yutumu-panel-inner {
+/*Positioning stuff*/
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+/*Box model stuff*/
+  width: 98.5%;
+  height: 98.5%;
+  border-radius: 0.6rem;
+  background-color: #ffffff6e;
+/*Typography stuff*/
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  color: #171717;
+/*Manipulations stuff*/
+  transform: translate(-50%, -50%);
+/*Miscellaneous*/
+  backdrop-filter: blur(0.6rem);
+  box-shadow: 0 0 1.5rem #ffffff33;
+  overflow: hidden;
+}
+
+.yutumu-panel-header {
+/*Display stuff*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+/*Positioning stuff*/
+  position: relative;
+/*Box model stuff*/
+  height: 2.4rem;
+  padding: 0.2rem;
+  background-color: #ffffff66;
+/*Typography stuff*/
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #171717;
+/*Miscellaneous*/
+  cursor: move;
+  user-select: none;
+}
+
+.yutumu-panel-header img {
+/*Display stuff*/
+  display: block;
+/*Box model stuff*/
+  max-width: 75%;
+  max-height: 100%;
+/*Manipulations stuff*/
+  filter: url(#wavyslow);
+}
+
+.yutumu-panel-header-button {
+/*Display stuff*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+/*Positioning stuff*/
+  position: absolute;
+  top: 0.2rem;
+/*Box model stuff*/
+  width: 2.0rem;
+  height: 2.0rem;
+  border: none;
+  border-radius: 50%;
+  background-color: #ffffff99;
+/*Typography stuff*/
+  font-size: 1.3rem;
+  color: #171717;
+/*Miscellaneous*/
+  cursor: pointer;
+  line-height: 1;
+}
+
+.yutumu-panel-header-button:hover {
+/*Box model stuff*/
+  background-color: #ffffffcc;
+}
+
+.help-button {
+/*Positioning stuff*/
+  left: 0.2rem;
+}
+
+.close-button {
+/*Positioning stuff*/
+  right: 0.2rem;
+}
+
+.minimize-button {
+/*Positioning stuff*/
+  right: 2.5rem;
+}
+
+.yutumu-panel-divider {
+/*Positioning stuff*/
+  position: relative;
+/*Box model stuff*/
+  width: 100%;
+  height: 0.2rem;
+/*Miscellaneous*/
+  overflow: visible;
+}
+
+.yutumu-panel-divider::before {
+/*Display stuff*/
+  content: "";
+/*Positioning stuff*/
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+/*Box model stuff*/
+  border-top: 0.2rem solid #ffffff80;
+/*Manipulations stuff*/
+  filter: url(#wavyfast);
+/*Miscellaneous*/
+  pointer-events: none;
+}
+
+.yutumu-panel-content {
+/*Box model stuff*/
+  height: 95%;
+  padding: 1.4rem;
+/*Miscellaneous*/
+  overflow-y: auto;
+}
+
+.yutumu-section {
+/*Box model stuff*/
+  margin-bottom: 0.8rem;
+  padding: 0.6rem;
+}
+
+.yutumu-button-group {
+/*Display stuff*/
+  display: flex;
+  align-items: center;
+/*Miscellaneous*/
+  gap: 0.4rem;
+}
+
+.yutumu-main-button {
+/*Display stuff*/
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+/*Box model stuff*/
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.4rem;
+  background: #ffffff99;
+/*Typography stuff*/
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  text-align: left;
+/*Manipulations stuff*/
+  transition: background-color 0.3s ease, transform 0.2s ease;
+/*Miscellaneous*/
+  cursor: pointer;
+}
+
+.yutumu-main-button:hover {
+/*Box model stuff*/
+  background: #ffffffcc;
+/*Manipulations stuff*/
+  transform: scale(1.02);
+}
+
+.yutumu-main-button .icon {
+/*Box model stuff*/
+  margin-right: 0.6rem;
+/*Typography stuff*/
+  font-size: 2rem;
+}
+
+.yutumu-sort-dropdown {
+/*Display stuff*/
+  display: block;
+/*Positioning stuff*/
+  position: relative;
+/*Box model stuff*/
+  width: 100%;
+/*Miscellaneous*/
+  overflow: visible;
+}
+
+.yutumu-sort-dropdown > button {
+/*Box model stuff*/
+  width: 100%;
+}
+
+.yutumu-sort-options {
+/*Positioning stuff*/
+  position: absolute;
+  left: 0;
+  top: 110%;
+  z-index: 10;
+/*Box model stuff*/
+  width: 100%;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+  background: #ffffff;
+/*Miscellaneous*/
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.yutumu-sort-option {
+/*Display stuff*/
+  display: block;
+/*Box model stuff*/
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  background: transparent;
+/*Typography stuff*/
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  text-align: left;
+/*Manipulations stuff*/
+  transition: background-color 0.2s ease;
+/*Miscellaneous*/
+  cursor: pointer;
+}
+
+.yutumu-sort-option:hover {
+/*Box model stuff*/
+  background: #f0f0f0;
+}

@@ -1,0 +1,39 @@
+.muu {
+    /*Display stuff*/
+    display: block;
+    /*Box model stuff*/
+    width: 12.0rem;
+    margin: 0 auto;
+    padding-bottom: 1.0rem;
+    /*Manipulations stuff*/
+    filter: url(#wavyslow);
+}
+
+.yutumu-intro {
+    /*Positioning stuff*/
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    /*Box model stuff*/
+    width: 38.0rem;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    border-radius: 0.7rem;
+    /*Miscellaneous*/
+    overflow: hidden;
+}
+
+.introjs-tooltiptext {
+    /*Typography stuff*/
+    text-align: left;
+}
+
+.introjs-tooltiptext .yutumu-intro-text {
+    /*Display stuff*/
+    display: grid;
+    justify-items: center;
+    /*Typography stuff*/
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 2.0rem;
+}

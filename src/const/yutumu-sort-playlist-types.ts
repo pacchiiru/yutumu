@@ -1,0 +1,5 @@
+export enum YutumuSortPlaylistTypes {
+    BY_SONG_ARTIST_AND_TITLE = "BY_SONG_ARTIST_AND_TITLE",
+    BY_SONG_TITLE = "BY_SONG_TITLE",
+    BY_SONG_LENGTH = "BY_SONG_LENGTH"
+}

@@ -1,0 +1,35 @@
+<div class="yutumu-panel-inner">
+  <div class="yutumu-panel-header">
+    <button id="yutumu-help-button" class="yutumu-panel-header-button help-button" title="Help">?</button>
+    <img src="{{BANNER_URL}}" alt="Yutumu Banner" />
+    <button id="yutumu-minimize-button" class="yutumu-panel-header-button minimize-button" title="Minimize">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M19 13H5v-2h14v2z" />
+      </svg>
+    </button>
+    <button id="yutumu-close-button" class="yutumu-panel-header-button close-button" title="Close">✕</button>
+  </div>
+  <div class="yutumu-panel-divider"></div>
+  <div class="yutumu-panel-content">
+    <p>
+      Yutumu is a Chrome extension that enhances YouTube Music with new features.
+    </p>
+
+    <!-- Section for Playlist Features -->
+    <div class="yutumu-section" data-context="playlist">
+      <div class="yutumu-button-group">
+        <div class="yutumu-sort-dropdown">
+          <button id="yutumu-sort-playlist-button" class="yutumu-main-button" title="Sort Playlist">
+            <span class="icon">🔀</span> Sort Playlist
+          </button>
+          <div class="yutumu-sort-options hidden">
+            <button id="sort-by-artist" class="yutumu-sort-option">By Artist and Song Title</button>
+            <button id="sort-by-title" class="yutumu-sort-option">By Song Title</button>
+            <button id="sort-by-length" class="yutumu-sort-option">By Song Length</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
