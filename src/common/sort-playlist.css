@@ -1,0 +1,16 @@
+.yu-cl-sort-playlist-song-highlight {
+    position: relative;
+}
+
+.yu-cl-sort-playlist-song-highlight::before {
+    border-radius: 0.7rem;
+    border: 0.2rem solid #ffffff80;
+    bottom: 0;
+    content: "";
+    filter: url(#wavyfast);
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

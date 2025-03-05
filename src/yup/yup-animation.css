@@ -1,0 +1,115 @@
+@keyframes yu-anim-yup-open {
+  0% {
+    opacity: 0;
+    transform: var(--initial-transform, translate(0rem, 0rem)) translateY(1.2rem) scale(0.8) rotate(-5deg);
+    filter: blur(0.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: var(--initial-transform, translate(0rem, 0rem));
+    filter: blur(0rem);
+  }
+}
+
+.yu-cl-yup.yu-cl-yup-opening {
+  animation: yu-anim-yup-open 0.8s forwards ease-out;
+}
+
+@keyframes yu-anim-yup-minimize-out {
+  0% {
+    opacity: 1;
+    transform: var(--initial-transform, none);
+    filter: blur(0rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: var(--initial-transform, none) translateY(-1.2rem) scale(1.2);
+    filter: blur(0.2rem);
+  }
+}
+
+@keyframes yu-anim-yup-minimize-in {
+  0% {
+    opacity: 0;
+    transform: var(--target-transform, none) translateY(1.2rem) scale(0.8);
+    filter: blur(0.2rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: var(--target-transform, none);
+    filter: blur(0rem);
+  }
+}
+
+.yu-cl-yup.yu-cl-yup-minimizing-out {
+  animation: yu-anim-yup-minimize-out 0.8s forwards ease-out;
+}
+
+.yu-cl-yup.yu-cl-yup-minimizing-in {
+  animation: yu-anim-yup-minimize-in 0.8s forwards ease-out;
+}
+
+@keyframes yu-anim-yup-close {
+  0% {
+    opacity: 1;
+    transform: var(--initial-transform, none);
+    filter: blur(0rem);
+  }
+
+  100% {
+    opacity: 0;
+    transform: var(--initial-transform, none) translateY(-1.2rem) scale(1.2) rotate(10deg);
+    filter: blur(0.2rem);
+  }
+}
+
+.yu-cl-yup.yu-cl-yup-closing {
+  animation: yu-anim-yup-close 0.8s forwards ease-out;
+}
+
+@keyframes yu-anim-yup-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes yu-anim-yup-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.yu-cl-yup-fading-in {
+  animation: yu-anim-yup-fade-in 0.4s ease-out;
+  opacity: 1;
+}
+
+.yu-cl-yup-fading-out {
+  animation: yu-anim-yup-fade-out 0.4s ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes yu-anim-yup-color-pulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.yu-cl-yup-color-pulsing {
+  animation: yu-anim-yup-color-pulse 2s infinite;
+}

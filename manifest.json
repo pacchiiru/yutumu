@@ -1,0 +1,45 @@
+{
+  "name": "Yutumu",
+  "description": "Enhances YouTube Music.",
+  "version": "0.2.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://music.youtube.com/*"
+      ],
+      "js": [
+        "yup.bundle.js"
+      ],
+      "css": [
+        "css/yup.bundle.css"
+      ]
+    }
+  ],
+  "action": {
+    "default_popup": "yue.html",
+    "default_title": "Yutumu"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*",
+        "webfonts/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://lh3.googleusercontent.com/*"
+  ]
+}

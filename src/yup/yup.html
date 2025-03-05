@@ -1,0 +1,70 @@
+<div id="yu-id-yup-inner" class="yu-cl-yup-inner">
+
+  <!-- Header -->
+  <div id="yu-id-yup-header" class="yu-cl-yup-header">
+
+    <!-- Settings, Help -->
+    <button id="yu-id-settings-button" class="yu-cl-yup-header-button yu-cl-settings-button fas fa-cog" title="Settings"></button>
+    <button id="yu-id-help-button" class="yu-cl-yup-header-button yu-cl-help-button fas fa-question-circle" title="Help"></button>
+
+    <!-- Logo -->
+    <img src="{{BANNER_URL}}" />
+
+    <!-- Minimize, Close -->
+    <button id="yu-id-minimize-button" class="yu-cl-yup-header-button yu-cl-minimize-button fas fa-minus" title="Minimize"></button>
+    <button id="yu-id-close-button" class="yu-cl-yup-header-button yu-cl-close-button fas fa-times" title="Close"></button>
+  </div>
+
+  <div class="yu-cl-yup-divider"></div>
+
+  <div class="yu-cl-yup-content">
+
+    <!-- Main View -->
+    <div id="yu-id-main-view">
+
+      <!-- Blurb -->
+      <p>Yutumu is a Chrome extension that enhances YouTube Music with new features.</p>
+
+      <!-- Playlist Section -->
+      <div class="yu-cl-yup-section" data-context="playlist">
+        <div class="yu-cl-yup-button-group">
+          <div class="yu-cl-yup-dropdown">
+            <button id="yu-id-sort-playlist-button" class="yu-cl-yup-button" title="Sort Playlist">
+              <span class="yu-cl-icon">🔀</span> Sort Playlist
+            </button>
+            <div id="yu-id-yup-sort-playlist-options" class="yu-cl-yup-dropdown-options yu-cl-hidden">
+              <button id="yu-id-yup-sort-playlist-artist-and-song-title-asc-option" class="yu-cl-yup-dropdown-option">Artist + Song Title ↑</button>
+              <button id="yu-id-yup-sort-playlist-artist-and-song-title-desc-option" class="yu-cl-yup-dropdown-option">Artist + Song Title ↓</button>
+              <button id="yu-id-yup-sort-playlist-song-title-asc-option" class="yu-cl-yup-dropdown-option">Song Title ↑</button>
+              <button id="yu-id-yup-sort-playlist-song-title-desc-option" class="yu-cl-yup-dropdown-option">Song Title ↓</button>
+              <button id="yu-id-yup-sort-playlist-song-length-asc-option" class="yu-cl-yup-dropdown-option">Song Length ↑</button>
+              <button id="yu-id-yup-sort-playlist-song-length-desc-option" class="yu-cl-yup-dropdown-option">Song Length ↓</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings View -->
+    <div id="yu-id-settings-view" class="yu-cl-hidden yu-cl-settings-view">
+
+      <!-- Settings Header -->
+      <div class="yu-cl-settings-header">
+        <button id="yu-id-settings-back-button" class="yu-cl-settings-back-button" title="Back">←</button>
+      </div>
+
+      <!-- Settings -->
+      <div class="yu-cl-settings-content">
+
+        <!-- Sort Playlist Sidebar -->
+        <div class="yu-cl-setting-item">
+          <label for="yu-id-setting-sort-playlist-sidebar" class="yu-cl-setting-label">Sort Playlist Sidebar</label>
+          <input type="checkbox" id="yu-id-setting-sort-playlist-sidebar" class="yu-cl-setting-toggle" />
+        </div>
+
+        <!-- Additional settings -->
+
+      </div>
+    </div>
+  </div>
+</div>

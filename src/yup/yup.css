@@ -1,0 +1,149 @@
+.yu-cl-yup {
+  border-radius: 0.7rem;
+  height: 60.0rem;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 30.0rem;
+  z-index: 10000;
+}
+
+.yu-cl-yup::before {
+  border-radius: inherit;
+  border: 0.2rem solid var(--yup-border-color, #ffffff80);
+  bottom: 0;
+  content: "";
+  filter: url(#wavyfast);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  transition: border-color 0.5s ease-in-out, border-width 0.5s ease-in-out;
+  top: 0;
+}
+
+.yu-cl-yup.yu-cl-yup-song-playing::before {
+  border: 0.7rem solid var(--yup-border-color, #ffffff80);
+}
+
+.yu-cl-yup-inner {
+  backdrop-filter: blur(0.6rem);
+  background-color: var(--yup-background-color, #ffffff6e);
+  border-radius: 0.6rem;
+  box-shadow: 0 0 1.5rem #ffffff33;
+  color: #171717;
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  height: 98.5%;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 98.5%;
+  z-index: 3;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.yu-cl-yup-divider {
+  height: 0.2rem;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+.yu-cl-yup-divider::before {
+  border-top: 0.2rem solid #ffffff80;
+  content: "";
+  filter: url(#wavyfast);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.yu-cl-yup-content {
+  height: 95%;
+  overflow-y: auto;
+  padding: 1.4rem;
+}
+
+.yu-cl-yup-section {
+  margin-bottom: 0.8rem;
+  padding: 0.6rem;
+}
+
+.yu-cl-yup-button-group {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.yu-cl-yup-button {
+  align-items: center;
+  background: #ffffff99;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-grow: 1;
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  justify-content: flex-start;
+  padding: 0.6rem;
+  text-align: left;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.yu-cl-yup-button:hover {
+  background: #ffffffcc;
+  transform: scale(1.02);
+}
+
+.yu-cl-yup-button .yu-cl-icon {
+  filter: grayscale(100%);
+  font-size: 2rem;
+  margin-right: 0.6rem;
+}
+
+.yu-cl-yup-dropdown {
+  display: block;
+  overflow: visible;
+  position: relative;
+  width: 100%;
+}
+
+.yu-cl-yup-dropdown>button {
+  width: 100%;
+}
+
+.yu-cl-yup-dropdown-options {
+  background: #ffffff;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #ccc;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+  left: 0;
+  position: absolute;
+  top: 110%;
+  width: 100%;
+  z-index: 10;
+}
+
+.yu-cl-yup-dropdown-option {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  padding: 0.6rem;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.yu-cl-yup-dropdown-option:hover {
+  background: #f0f0f0;
+}

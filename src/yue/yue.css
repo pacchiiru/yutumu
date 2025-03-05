@@ -1,0 +1,25 @@
+.yu-cl-extension-body {
+    background-color: #f7f7f7;
+    color: #171717;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    margin: 1.2rem;
+    min-height: 12.5rem;
+    min-width: 12.5rem;
+    padding: 0.6rem;
+}
+
+.yu-cl-extension-button {
+    background-color: #ffffff;
+    border-radius: 0.4rem;
+    border: none;
+    box-shadow: 0 0.1rem 0.4rem #0000004d;
+    cursor: pointer;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 1.4rem;
+    padding: 0.6rem 1.0rem;
+    width: 100%;
+}
+
+.yu-cl-extension-button:hover {
+    background-color: #eaeaea;
+}

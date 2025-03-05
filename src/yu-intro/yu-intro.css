@@ -1,0 +1,30 @@
+.yu-cl-intro {
+    border-radius: 0.7rem;
+    height: auto;
+    left: 0;
+    max-height: none;
+    max-width: none;
+    overflow: hidden;
+    top: 0;
+    width: 38.0rem;
+    z-index: 10000;
+}
+
+.yu-cl-intro-muu {
+    display: block;
+    filter: url(#wavyslow);
+    margin: 0 auto;
+    padding-bottom: 1.0rem;
+    width: 12.0rem;
+}
+
+.introjs-tooltiptext {
+    text-align: left;
+}
+
+.introjs-tooltiptext .yu-cl-intro-text {
+    display: grid;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 2.0rem;
+    justify-items: center;
+}

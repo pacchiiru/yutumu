@@ -1,0 +1,63 @@
+.yu-cl-yup-header {
+  align-items: center;
+  background-color: #ffffff66;
+  color: #171717;
+  cursor: move;
+  display: flex;
+  font-family: 'DidactGothic-Regular', sans-serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  height: 2.4rem;
+  justify-content: center;
+  padding: 0.2rem;
+  position: relative;
+  user-select: none;
+}
+
+.yu-cl-yup-header img {
+  display: block;
+  filter: url(#wavyslow);
+  max-height: 100%;
+  max-width: 75%;
+}
+
+.yu-cl-yup-header-button {
+  align-items: center;
+  background-color: #ffffff99;
+  border-radius: 50%;
+  border: none;
+  color: #181818;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.3rem;
+  height: 2.0rem;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  top: 0.2rem;
+  width: 2.0rem;
+}
+
+.fa.yu-cl-yup-header-button {
+  display: flex;
+}
+
+.yu-cl-yup-header-button:hover {
+  background-color: #ffffffcc;
+}
+
+.yu-cl-settings-button {
+  left: 0.2rem;
+}
+
+.yu-cl-help-button {
+  left: 2.5rem;
+}
+
+.yu-cl-close-button {
+  right: 0.2rem;
+}
+
+.yu-cl-minimize-button {
+  right: 2.5rem;
+}
