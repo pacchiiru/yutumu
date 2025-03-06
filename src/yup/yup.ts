@@ -17,12 +17,15 @@ import { DomUtils } from '../utils/dom-utils';
 import { SvgUtils } from '../utils/svg-utils';
 import { sortPlaylist } from '../common/sort-playlist';
 import { sortPlaylistSidebar } from '../common/sort-playlist-sidebar';
+import { sortSaveToPlaylistDialog } from '../common/sort-save-to-playlist-dialog';
 import { startTutorial } from '../yu-intro/yu-intro';
 import { showToastOverElement } from '../common/toast';
 import yupTemplate from './yup.html';
 
 export class Yup {
-  private UPDATE_INTERVAL_MS: number = 2000;
+  private UPDATE_INTERVAL_MS_SHORT: number = 1000;
+  private UPDATE_INTERVAL_MS_LONG: number = 2000;
+  private sortPlaylistDialogIntervalId?: number;
   private yupId: string = "yu-id-yup";
   private yupElement: HTMLElement | null = null;
   private yupHeaderElement: HTMLElement | null = null;
@@ -51,7 +54,7 @@ export class Yup {
         if (panelElement) {
           yupColorService.updateYupBorder(panelElement);
         }
-      }, yup.UPDATE_INTERVAL_MS);
+      }, yup.UPDATE_INTERVAL_MS_SHORT);
     };
 
     if (document.readyState === "loading") {
@@ -61,7 +64,6 @@ export class Yup {
       startUpdateInterval();
     }
   }
-
 
   public create(): void {
     if (document.getElementById(this.yupId)) return;
@@ -250,6 +252,7 @@ export class Yup {
     const mainView = panel.querySelector(YupSelectorsById.MAIN_VIEW) as HTMLElement | null;
     const settingsView = panel.querySelector(YupSelectorsById.SETTINGS_VIEW) as HTMLElement | null;
     const toggleSortSidebar = panel.querySelector(YupSelectorsById.SETTING_SORT_PLAYLIST_SIDEBAR) as HTMLInputElement | null;
+    const toggleSortSaveToPlaylistDialog = panel.querySelector(YupSelectorsById.SETTING_SORT_SAVE_TO_PLAYLIST_DIALOG) as HTMLInputElement | null;
 
     if (settingsButton && backButton && mainView && settingsView) {
       settingsButton.addEventListener("click", () => this.toggleView(mainView, settingsView));
@@ -262,7 +265,6 @@ export class Yup {
         await this.updateSortSidebar(enabled);
       });
 
-      // Initialize the toggle state on load
       (async () => {
         try {
           const enabled = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_SIDEBAR);
@@ -270,6 +272,24 @@ export class Yup {
           if (enabled) {
             sortPlaylistSidebar();
           }
+        } catch (err) {
+          YuLogService.error(`Error loading setting: ${err}`);
+        }
+      })();
+    }
+
+    if (toggleSortSaveToPlaylistDialog) {
+      toggleSortSaveToPlaylistDialog.addEventListener("change", async (e) => {
+        const enabled = (e.target as HTMLInputElement).checked;
+        await this.updateSortSaveToPlaylistDialog(enabled);
+      });
+
+      (async () => {
+        try {
+          const setting = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_SAVE_TO_PLAYLIST_DIALOG);
+          const enabled = Boolean(setting);
+          toggleSortSaveToPlaylistDialog.checked = enabled;
+          await this.updateSortSaveToPlaylistDialog(enabled);
         } catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
@@ -284,9 +304,35 @@ export class Yup {
 
   private updateSortSidebar = async (enabled: boolean) => {
     try {
-      const onEnable = enabled ? sortPlaylistSidebar : undefined;
-      await yuChromeStorageService.setSetting(YuChromeSettings.SORT_PLAYLIST_SIDEBAR, enabled, onEnable);
+      await yuChromeStorageService.setSetting(
+        YuChromeSettings.SORT_PLAYLIST_SIDEBAR,
+        enabled,
+        enabled ? sortPlaylistSidebar : undefined
+      );
       YuLogService.log(`Sort Playlist Sidebar setting saved: ${enabled}`);
+    } 
+    catch (err) {
+      YuLogService.error(`Error saving setting: ${err}`);
+    }
+  };
+
+  private updateSortSaveToPlaylistDialog = async (enabled: boolean) => {
+    try {
+      await yuChromeStorageService.setSetting(YuChromeSettings.SORT_SAVE_TO_PLAYLIST_DIALOG, enabled);
+      YuLogService.log(`Sort Save to Playlist Dialog setting saved: ${enabled}`);
+      if (enabled) {
+        if (!this.sortPlaylistDialogIntervalId) {
+          this.sortPlaylistDialogIntervalId = window.setInterval(() => {
+            sortSaveToPlaylistDialog();
+          }, this.UPDATE_INTERVAL_MS_LONG);
+        }
+      } 
+      else {
+        if (this.sortPlaylistDialogIntervalId) {
+          clearInterval(this.sortPlaylistDialogIntervalId);
+          this.sortPlaylistDialogIntervalId = undefined;
+        }
+      }
     } 
     catch (err) {
       YuLogService.error(`Error saving setting: ${err}`);

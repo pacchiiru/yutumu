@@ -1,5 +1,5 @@
 .yu-cl-yup {
-  border-radius: 0.7rem;
+  border-radius: 0.8rem;
   height: 60.0rem;
   left: 0;
   overflow: hidden;
@@ -67,7 +67,11 @@
 .yu-cl-yup-content {
   height: 95%;
   overflow-y: auto;
-  padding: 1.4rem;
+  padding: 1.0rem;
+}
+
+.yu-cl-main-view-blurb {
+  font-size: 1.6rem;
 }
 
 .yu-cl-yup-section {
@@ -90,7 +94,7 @@
   display: flex;
   flex-grow: 1;
   font-family: 'DidactGothic-Regular', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   justify-content: flex-start;
   padding: 0.6rem;
   text-align: left;
@@ -137,7 +141,7 @@
   cursor: pointer;
   display: block;
   font-family: 'DidactGothic-Regular', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   padding: 0.6rem;
   text-align: left;
   transition: background-color 0.2s ease;

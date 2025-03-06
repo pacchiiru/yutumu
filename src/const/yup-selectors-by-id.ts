@@ -7,6 +7,7 @@ export const YupSelectorsById = {
     MINIMIZE_BUTTON: "#yu-id-minimize-button",
     SETTINGS_VIEW: "#yu-id-settings-view",
     SETTING_SORT_PLAYLIST_SIDEBAR: "#yu-id-setting-sort-playlist-sidebar",
+    SETTING_SORT_SAVE_TO_PLAYLIST_DIALOG: "#yu-id-setting-sort-save-to-playlist-dialog",
     SETTINGS_BACK_BUTTON: "#yu-id-settings-back-button",
     SETTINGS_BUTTON: "#yu-id-settings-button",
     SORT_PLAYLIST_BUTTON: "#yu-id-sort-playlist-button",
