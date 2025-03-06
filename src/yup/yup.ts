@@ -47,14 +47,18 @@ export class Yup {
     });
 
     const startUpdateInterval = () => {
-      yup.updateContext();
+
       setInterval(() => {
         yup.updateContext();
+      }, yup.UPDATE_INTERVAL_MS_SHORT);
+
+      setInterval(() => {
         const panelElement = yup.requireYupElement();
         if (panelElement) {
           yupColorService.updateYupBorder(panelElement);
         }
-      }, yup.UPDATE_INTERVAL_MS_SHORT);
+      }, yup.UPDATE_INTERVAL_MS_LONG);
+
     };
 
     if (document.readyState === "loading") {
