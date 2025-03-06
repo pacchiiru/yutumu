@@ -10,11 +10,14 @@ export class YuChromeStorageService {
     });
   }
 
-  async setSetting(key: string, value: any): Promise<void> {
+  async setSetting(key: string, value: any, onEnable?: () => void): Promise<void> {
     return new Promise((resolve, reject) => {
       chrome.storage.sync.set({ [key]: value }, () => {
         if (chrome.runtime.lastError) {
           return reject(chrome.runtime.lastError);
+        }
+        if (!!onEnable) {
+          onEnable();
         }
         resolve();
       });

@@ -36,13 +36,13 @@ export class Yup {
   public static init(): void {
     const yup = new Yup();
     yup.create();
-  
+
     chrome.runtime.onMessage.addListener((message: any) => {
       if (message.action === YuChromeActions.REOPEN_YUP) {
         yup.create();
       }
     });
-    
+
     const startUpdateInterval = () => {
       yup.updateContext();
       setInterval(() => {
@@ -53,15 +53,15 @@ export class Yup {
         }
       }, yup.UPDATE_INTERVAL_MS);
     };
-  
+
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", startUpdateInterval);
-    } 
+    }
     else {
       startUpdateInterval();
     }
   }
-  
+
 
   public create(): void {
     if (document.getElementById(this.yupId)) return;
@@ -251,31 +251,18 @@ export class Yup {
     const settingsView = panel.querySelector(YupSelectorsById.SETTINGS_VIEW) as HTMLElement | null;
     const toggleSortSidebar = panel.querySelector(YupSelectorsById.SETTING_SORT_PLAYLIST_SIDEBAR) as HTMLInputElement | null;
 
-    if (settingsButton && mainView && settingsView) {
-      settingsButton.addEventListener("click", () => {
-        mainView.classList.add(YuNamesClasses.YU_HIDDEN);
-        settingsView.classList.remove(YuNamesClasses.YU_HIDDEN);
-      });
-    }
-
-    if (backButton && mainView && settingsView) {
-      backButton.addEventListener("click", () => {
-        settingsView.classList.add(YuNamesClasses.YU_HIDDEN);
-        mainView.classList.remove(YuNamesClasses.YU_HIDDEN);
-      });
+    if (settingsButton && backButton && mainView && settingsView) {
+      settingsButton.addEventListener("click", () => this.toggleView(mainView, settingsView));
+      backButton.addEventListener("click", () => this.toggleView(settingsView, mainView));
     }
 
     if (toggleSortSidebar) {
       toggleSortSidebar.addEventListener("change", async (e) => {
         const enabled = (e.target as HTMLInputElement).checked;
-        try {
-          await yuChromeStorageService.setSetting(YuChromeSettings.SORT_PLAYLIST_SIDEBAR, enabled);
-          YuLogService.log(`Sort Playlist Sidebar setting saved: ${enabled}`);
-        } catch (err) {
-          YuLogService.error(`Error saving setting: ${err}`);
-        }
+        await this.updateSortSidebar(enabled);
       });
 
+      // Initialize the toggle state on load
       (async () => {
         try {
           const enabled = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_SIDEBAR);
@@ -289,6 +276,22 @@ export class Yup {
       })();
     }
   }
+
+  private toggleView = (hideEl: HTMLElement, showEl: HTMLElement) => {
+    hideEl.classList.add(YuNamesClasses.YU_HIDDEN);
+    showEl.classList.remove(YuNamesClasses.YU_HIDDEN);
+  };
+
+  private updateSortSidebar = async (enabled: boolean) => {
+    try {
+      const onEnable = enabled ? sortPlaylistSidebar : undefined;
+      await yuChromeStorageService.setSetting(YuChromeSettings.SORT_PLAYLIST_SIDEBAR, enabled, onEnable);
+      YuLogService.log(`Sort Playlist Sidebar setting saved: ${enabled}`);
+    } 
+    catch (err) {
+      YuLogService.error(`Error saving setting: ${err}`);
+    }
+  };
 
   private setupHelpButton(): void {
     const panel = this.requireYupElement();
@@ -361,15 +364,15 @@ export class Yup {
   private setupSortPlaylist(): void {
     const panel = this.requireYupElement();
     if (!panel) return;
-  
+
     const sortPlaylistButton = panel.querySelector(YupSelectorsById.SORT_PLAYLIST_BUTTON) as HTMLButtonElement | null;
     const sortOptionsMenu = panel.querySelector(YupSelectorsById.SORT_PLAYLIST_OPTIONS) as HTMLDivElement | null;
     if (!sortPlaylistButton || !sortOptionsMenu) return;
-  
+
     sortPlaylistButton.addEventListener("click", () => {
       sortOptionsMenu.classList.toggle(YuNamesClasses.YU_HIDDEN);
     });
-  
+
     const sortOptions: { selector: string; sortType: YuSortPlaylistTypes }[] = [
       { selector: YupSelectorsById.SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_ASC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_DESC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_DESC },
@@ -378,7 +381,7 @@ export class Yup {
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_LENGTH_ASC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_LENGTH_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_LENGTH_DESC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_LENGTH_DESC },
     ];
-  
+
     sortOptions.forEach(({ selector, sortType }) => {
       const optionButton = panel.querySelector(selector);
       optionButton?.addEventListener("click", () => {
