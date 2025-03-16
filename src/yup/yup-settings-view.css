@@ -55,3 +55,40 @@
   height: 2rem;
   width: 2rem;
 }
+
+.yu-cl-setting-item {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #ffffff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem;
+  position: relative;
+}
+
+.yu-cl-setting-tooltip {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 0.4rem;
+  bottom: 110%;
+  color: #fff;
+  font-size: 1.4rem;
+  left: 50%;
+  max-width: 97%;
+  min-width: 12rem;
+  opacity: 0;
+  padding: 0.4rem;
+  position: absolute;
+  text-align: left;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  visibility: hidden;
+  white-space: normal;
+  width: max-content;
+  word-wrap: break-word;
+}
+
+.yu-cl-setting-item:hover .yu-cl-setting-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
