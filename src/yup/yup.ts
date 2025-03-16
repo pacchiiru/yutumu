@@ -255,12 +255,30 @@ export class Yup {
     const backButton = panel.querySelector(YupSelectorsById.SETTINGS_BACK_BUTTON) as HTMLButtonElement | null;
     const mainView = panel.querySelector(YupSelectorsById.MAIN_VIEW) as HTMLElement | null;
     const settingsView = panel.querySelector(YupSelectorsById.SETTINGS_VIEW) as HTMLElement | null;
+    const toggleSortPlaylistByEnglishOnly = panel.querySelector(YupSelectorsById.SETTING_SORT_PLAYLIST_BY_ENGLISH_ONLY) as HTMLInputElement | null;
     const toggleSortSidebar = panel.querySelector(YupSelectorsById.SETTING_SORT_PLAYLIST_SIDEBAR) as HTMLInputElement | null;
     const toggleSortSaveToPlaylistDialog = panel.querySelector(YupSelectorsById.SETTING_SORT_SAVE_TO_PLAYLIST_DIALOG) as HTMLInputElement | null;
 
     if (settingsButton && backButton && mainView && settingsView) {
       settingsButton.addEventListener("click", () => this.toggleView(mainView, settingsView));
       backButton.addEventListener("click", () => this.toggleView(settingsView, mainView));
+    }
+
+    if (toggleSortPlaylistByEnglishOnly) {
+      toggleSortPlaylistByEnglishOnly.addEventListener("change", async (e) => {
+        const enabled = (e.target as HTMLInputElement).checked;
+        await this.updateSortPlaylistByEnglishOnly(enabled);
+      });
+
+      (async () => {
+        try {
+          const enabled = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_BY_ENGLISH_ONLY);
+          toggleSortPlaylistByEnglishOnly.checked = Boolean(enabled);
+        } 
+        catch (err) {
+          YuLogService.error(`Error loading setting: ${err}`);
+        }
+      })();
     }
 
     if (toggleSortSidebar) {
@@ -276,7 +294,8 @@ export class Yup {
           if (enabled) {
             sortPlaylistSidebar();
           }
-        } catch (err) {
+        } 
+        catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
       })();
@@ -294,7 +313,8 @@ export class Yup {
           const enabled = Boolean(setting);
           toggleSortSaveToPlaylistDialog.checked = enabled;
           await this.updateSortSaveToPlaylistDialog(enabled);
-        } catch (err) {
+        } 
+        catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
       })();
@@ -304,6 +324,19 @@ export class Yup {
   private toggleView = (hideEl: HTMLElement, showEl: HTMLElement) => {
     hideEl.classList.add(YuNamesClasses.YU_HIDDEN);
     showEl.classList.remove(YuNamesClasses.YU_HIDDEN);
+  };
+
+  private updateSortPlaylistByEnglishOnly = async (enabled: boolean) => {
+    try {
+      await yuChromeStorageService.setSetting(
+        YuChromeSettings.SORT_PLAYLIST_BY_ENGLISH_ONLY,
+        enabled
+      );
+      YuLogService.log(`Sort Playlist by English only setting saved: ${enabled}`);
+    } 
+    catch (err) {
+      YuLogService.error(`Error saving setting: ${err}`);
+    }
   };
 
   private updateSortSidebar = async (enabled: boolean) => {

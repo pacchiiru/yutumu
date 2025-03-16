@@ -3,8 +3,10 @@ import { YuNamesClasses } from '../const/yu-names-classes';
 import { YuSortPlaylistTypes } from '../const/yu-sort-playlist-types';
 import { YuLogService } from '../services/yu-log-service';
 import { DomUtils } from '../utils/dom-utils';
+import { yuChromeStorageService } from '../services/yu-chrome-storage-service';
+import { YuChromeSettings } from '../const/yu-chrome-settings';
 
-export function sortPlaylist(sortType: YuSortPlaylistTypes): void {
+export async function sortPlaylist(sortType: YuSortPlaylistTypes): Promise<void> {
   const container = document.querySelector(YtSelectors.PLAYLIST);
   if (!container) {
     YuLogService.warn("Cannot find playlist container.");
@@ -17,49 +19,64 @@ export function sortPlaylist(sortType: YuSortPlaylistTypes): void {
     return;
   }
 
+  const englishOnly = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_BY_ENGLISH_ONLY) || false;
+
+  function sanitizeString(str: string): string {
+    if (!str) return "";
+    
+    // Remove all special characters including slashes and brackets
+    let sanitized = str.replace(/[\p{P}\p{S}\/\\]/gu, "");
+    
+    if (englishOnly) {
+      // Keep only English alphanumeric characters and spaces
+      sanitized = sanitized.replace(/[^a-zA-Z0-9 ]/g, "");
+    }
+    
+    return sanitized.trim();
+  }
+
   const SONG_ARTIST_SELECTOR = ".secondary-flex-columns .flex-column";
   const SONG_TITLE_SELECTOR = ".title.ytmusic-responsive-list-item-renderer.complex-string";
   const SONG_LENGTH_SELECTOR = ".fixed-column.MUSIC_RESPONSIVE_LIST_ITEM_COLUMN_DISPLAY_PRIORITY_HIGH";
   const TITLE_ATTRIBUTE = "title";
 
-  // Define comparator functions for each sort type
   const comparators: Record<string, (a: Element, b: Element) => number> = {
     [YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_ASC]: (a, b) => {
-      const artistA = DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE);
-      const artistB = DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE);
-      const trackA = DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
-      const trackB = DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
+      const artistA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
+      const artistB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
+      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
+      const trackB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
       const cmp = artistA.localeCompare(artistB);
       return cmp !== 0 ? cmp : trackA.localeCompare(trackB);
     },
     [YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_DESC]: (a, b) => {
-      const artistA = DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE);
-      const artistB = DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE);
-      const trackA = DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
-      const trackB = DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
+      const artistA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
+      const artistB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
+      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
+      const trackB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
       const cmp = artistB.localeCompare(artistA);
       return cmp !== 0 ? cmp : trackB.localeCompare(trackA);
     },
     [YuSortPlaylistTypes.BY_SONG_TITLE_ASC]: (a, b) => {
-      const trackA = DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
-      const trackB = DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
+      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
+      const trackB = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
       return trackA.localeCompare(trackB);
     },
     [YuSortPlaylistTypes.BY_SONG_TITLE_DESC]: (a, b) => {
-      const trackA = DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
-      const trackB = DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE);
+      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
+      const trackB = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
       return trackB.localeCompare(trackA);
     },
     [YuSortPlaylistTypes.BY_SONG_LENGTH_ASC]: (a, b) => {
       const lengthAString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const lengthBString = DomUtils.getTextContent(b.querySelector(SONG_LENGTH_SELECTOR));
+      const lengthBString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
       const timeA = parseSongLength(lengthAString);
       const timeB = parseSongLength(lengthBString);
       return timeA - timeB;
     },
     [YuSortPlaylistTypes.BY_SONG_LENGTH_DESC]: (a, b) => {
       const lengthAString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const lengthBString = DomUtils.getTextContent(b.querySelector(SONG_LENGTH_SELECTOR));
+      const lengthBString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
       const timeA = parseSongLength(lengthAString);
       const timeB = parseSongLength(lengthBString);
       return timeB - timeA;
@@ -73,12 +90,10 @@ export function sortPlaylist(sortType: YuSortPlaylistTypes): void {
   }
   playlistItems.sort(comparator);
 
-  // Use a document fragment to minimize reflows when reordering DOM nodes.
   const fragment = document.createDocumentFragment();
   playlistItems.forEach(item => fragment.appendChild(item));
   container.appendChild(fragment);
 
-  // Apply a static border effect by adding the CSS class.
   playlistItems.forEach(item => {
     item.classList.add(YuNamesClasses.YU_SORT_PLAYLIST_SONG_HIGHLIGHT);
     item.addEventListener("dragend", () => {
