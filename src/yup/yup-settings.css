@@ -68,9 +68,9 @@
 }
 
 .yu-cl-setting-tooltip {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.84);
   border-radius: 0.4rem;
-  bottom: 110%;
+  bottom: 120%;
   color: #fff;
   font-size: 1.4rem;
   left: 50%;

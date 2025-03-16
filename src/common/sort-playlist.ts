@@ -1,15 +1,16 @@
+import { HtmlAttributes } from '../const/html-attributes';
 import { YtSelectors } from '../const/yt-selectors';
+import { YuChromeSettings } from '../const/yu-chrome-settings';
 import { YuNamesClasses } from '../const/yu-names-classes';
 import { YuSortPlaylistTypes } from '../const/yu-sort-playlist-types';
+import { yuChromeStorageService } from '../services/yu-chrome-storage-service';
 import { YuLogService } from '../services/yu-log-service';
 import { DomUtils } from '../utils/dom-utils';
-import { yuChromeStorageService } from '../services/yu-chrome-storage-service';
-import { YuChromeSettings } from '../const/yu-chrome-settings';
 
 export async function sortPlaylist(sortType: YuSortPlaylistTypes): Promise<void> {
   const container = document.querySelector(YtSelectors.PLAYLIST);
   if (!container) {
-    YuLogService.warn("Cannot find playlist container.");
+    YuLogService.error("Cannot find playlist container.");
     return;
   }
 
@@ -21,66 +22,43 @@ export async function sortPlaylist(sortType: YuSortPlaylistTypes): Promise<void>
 
   const englishOnly = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_BY_ENGLISH_ONLY) || false;
 
-  function sanitizeString(str: string): string {
-    if (!str) return "";
-    
-    // Remove all special characters including slashes and brackets
-    let sanitized = str.replace(/[\p{P}\p{S}\/\\]/gu, "");
-    
-    if (englishOnly) {
-      // Keep only English alphanumeric characters and spaces
-      sanitized = sanitized.replace(/[^a-zA-Z0-9 ]/g, "");
-    }
-    
-    return sanitized.trim();
-  }
-
-  const SONG_ARTIST_SELECTOR = ".secondary-flex-columns .flex-column";
-  const SONG_TITLE_SELECTOR = ".title.ytmusic-responsive-list-item-renderer.complex-string";
-  const SONG_LENGTH_SELECTOR = ".fixed-column.MUSIC_RESPONSIVE_LIST_ITEM_COLUMN_DISPLAY_PRIORITY_HIGH";
-  const TITLE_ATTRIBUTE = "title";
-
   const comparators: Record<string, (a: Element, b: Element) => number> = {
     [YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_ASC]: (a, b) => {
-      const artistA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
-      const artistB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
-      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      const trackB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
+      const artistA = getSongArtist(a, englishOnly);
+      const artistB = getSongArtist(b, englishOnly);
+      const songTitleA = getSongTitle(a, englishOnly);
+      const songTitleB = getSongTitle(b, englishOnly);
       const cmp = artistA.localeCompare(artistB);
-      return cmp !== 0 ? cmp : trackA.localeCompare(trackB);
+      return cmp !== 0 ? cmp : songTitleA.localeCompare(songTitleB);
     },
     [YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_DESC]: (a, b) => {
-      const artistA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
-      const artistB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_ARTIST_SELECTOR), TITLE_ATTRIBUTE));
-      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      const trackB = sanitizeString(DomUtils.getAttributeValue(b.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      const cmp = artistB.localeCompare(artistA);
-      return cmp !== 0 ? cmp : trackB.localeCompare(trackA);
-    },
-    [YuSortPlaylistTypes.BY_SONG_TITLE_ASC]: (a, b) => {
-      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      const trackB = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      return trackA.localeCompare(trackB);
-    },
-    [YuSortPlaylistTypes.BY_SONG_TITLE_DESC]: (a, b) => {
-      const trackA = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      const trackB = sanitizeString(DomUtils.getAttributeValue(a.querySelector(SONG_TITLE_SELECTOR), TITLE_ATTRIBUTE));
-      return trackB.localeCompare(trackA);
+      const artistA = getSongArtist(a, englishOnly);
+      const artistB = getSongArtist(b, englishOnly);
+      const songTitleA = getSongTitle(a, englishOnly);
+      const songTitleB = getSongTitle(b, englishOnly);
+      const cmp = artistA.localeCompare(artistB);
+      return cmp !== 0 ? cmp : songTitleB.localeCompare(songTitleA);
     },
     [YuSortPlaylistTypes.BY_SONG_LENGTH_ASC]: (a, b) => {
-      const lengthAString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const lengthBString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const timeA = parseSongLength(lengthAString);
-      const timeB = parseSongLength(lengthBString);
+      const timeA = getSongLength(a);
+      const timeB = getSongLength(b);
       return timeA - timeB;
     },
     [YuSortPlaylistTypes.BY_SONG_LENGTH_DESC]: (a, b) => {
-      const lengthAString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const lengthBString = DomUtils.getTextContent(a.querySelector(SONG_LENGTH_SELECTOR));
-      const timeA = parseSongLength(lengthAString);
-      const timeB = parseSongLength(lengthBString);
+      const timeA = getSongLength(a);
+      const timeB = getSongLength(b);
       return timeB - timeA;
     },
+    [YuSortPlaylistTypes.BY_SONG_TITLE_ASC]: (a, b) => {
+      const songTitleA = getSongTitle(a, englishOnly);
+      const songTitleB = getSongTitle(b, englishOnly);
+      return songTitleA.localeCompare(songTitleB);
+    },
+    [YuSortPlaylistTypes.BY_SONG_TITLE_DESC]: (a, b) => {
+      const songTitleA = getSongTitle(a, englishOnly);
+      const songTitleB = getSongTitle(b, englishOnly);
+      return songTitleB.localeCompare(songTitleA);
+    }
   };
 
   const comparator = comparators[sortType];
@@ -102,11 +80,46 @@ export async function sortPlaylist(sortType: YuSortPlaylistTypes): Promise<void>
   });
 }
 
-export function parseSongLength(timeStr: string): number {
-  if (!timeStr) return 0;
+export function getSongArtist(targetElement: Element, englishOnly: boolean): string {
+  const artistElement = targetElement.querySelector(YtSelectors.SORT_PLAYLIST_SONG_ARTIST_SELECTOR);
+  const artist = DomUtils.getAttributeValue(artistElement, HtmlAttributes.TITLE);
+  return sanitizeString(artist, englishOnly);
+}
+
+export function getSongTitle(targetElement: Element, englishOnly: boolean): string {
+  const titleElement = targetElement.querySelector(YtSelectors.SORT_PLAYLIST_SONG_TITLE_SELECTOR);
+  const songTitle = DomUtils.getAttributeValue(titleElement, HtmlAttributes.TITLE);
+  return sanitizeString(songTitle, englishOnly);
+}
+
+export function getSongLength(targetElement: Element): number {
+  const lengthElement = targetElement.querySelector(YtSelectors.SORT_PLAYLIST_SONG_LENGTH_SELECTOR);
+  const timeStr = DomUtils.getTextContent(lengthElement);
+
+  if (!timeStr) {
+    return 0;
+  }
+
   const parts = timeStr.split(":").map(part => parseInt(part.trim(), 10));
   if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
     return parts[0] * 60 + parts[1];
   }
+
   return 0;
+}
+
+export function sanitizeString(str: string, englishOnly: boolean): string {
+  if (!str) {
+    return "";
+  }
+  
+  // Remove all special characters including slashes and brackets
+  let sanitized = str.replace(/[\p{P}\p{S}\/\\]/gu, "");
+  
+  // Keep only English alphanumeric characters and spaces
+  if (englishOnly) {
+    sanitized = sanitized.replace(/[^a-zA-Z0-9 ]/g, "");
+  }
+  
+  return sanitized.trim();
 }

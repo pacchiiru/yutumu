@@ -1,5 +1,5 @@
-import { ToastAction } from '../const/toast-types';
 import { ToastMessages } from '../const/toast-messages';
+import { ToastAction } from '../const/toast-types';
 
 export function showToastOverElement(action: ToastAction, targetElement: HTMLElement): void {
   const messages = ToastMessages[action];

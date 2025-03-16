@@ -1,0 +1,91 @@
+.yu-cl-yup-dropdown {
+    display: block;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+}
+
+.yu-cl-yup-dropdown>button {
+    width: 100%;
+}
+
+.yu-cl-yup-dropdown-options {
+    background: #ffffff;
+    border-radius: 0.6rem;
+    border: 0.1rem solid #ccc;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    left: 0;
+    padding: 0.6rem;
+    position: absolute;
+    top: 110%;
+    width: 95%;
+    z-index: 10;
+}
+
+.yu-cl-yup-dropdown-grid {
+    align-items: center;
+    display: grid;
+    gap: 0.1rem;
+    grid-template-columns: 5fr 1fr 1fr;
+}
+
+.yu-cl-yup-dropdown-label {
+    align-items: center;
+    background: #eaeaea;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0.6rem;
+    text-align: left;
+    transition: background-color 0.2s ease;
+}
+
+.yu-cl-yup-dropdown-label:hover {
+    background: #dfdfdf;
+}
+
+.yu-cl-yup-dropdown-arrow {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 2.0rem;
+    padding-inline: 0;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.yu-cl-yup-dropdown-arrow:hover {
+    transform: scale(1.1);
+}
+
+.yu-cl-yup-dropdown-label-tooltip {
+  background: rgba(0, 0, 0, 0.84);
+  border-radius: 0.4rem;
+  bottom: 100%;
+  color: #fff;
+  font-size: 1.4rem;
+  left: 50%;
+  max-width: 98%;
+  min-width: 12rem;
+  opacity: 0;
+  padding: 0.4rem;
+  position: absolute;
+  text-align: left;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  visibility: hidden;
+  white-space: normal;
+  width: max-content;
+  word-wrap: break-word;
+}
+
+.yu-cl-yup-dropdown-label:hover .yu-cl-yup-dropdown-label-tooltip {
+  opacity: 1;
+  visibility: visible;
+}

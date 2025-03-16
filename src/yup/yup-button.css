@@ -1,0 +1,42 @@
+.yu-cl-yup-button-group {
+    align-items: center;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.yu-cl-yup-button {
+    align-items: center;
+    background: #ffffff99;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-family: 'DidactGothic-Regular', sans-serif;
+    font-size: 1.6rem;
+    justify-content: space-between;
+    padding: 0.6rem;
+    text-align: left;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    width: 100%;
+}
+
+.yu-cl-yup-button:hover {
+    background: #ffffffcc;
+    transform: scale(1.02);
+}
+
+.yu-cl-yup-button .yu-cl-icon {
+    font-size: 1.8rem;
+    margin-right: 0.6rem;
+}
+
+.yu-cl-yup-button .yu-cl-button-close-open-icon {
+    font-size: 1.0rem;
+}
+
+.yu-cl-yup-button .yu-cl-button-content {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-start;
+}

@@ -7,6 +7,7 @@ import { YuNamesClasses } from '../const/yu-names-classes';
 import { YuChromeActions } from '../const/yu-chrome-actions';
 import { YuChromeSettings } from '../const/yu-chrome-settings';
 import { YupConstants } from '../const/yup-constants';
+import { YupSelectorsByClassName } from '../const/yup-selectors-by-class-name';
 import { YupSelectorsById } from '../const/yup-selectors-by-id';
 import { ToastTypes } from '../const/toast-types';
 import { YuSortPlaylistTypes } from '../const/yu-sort-playlist-types';
@@ -274,7 +275,7 @@ export class Yup {
         try {
           const enabled = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_BY_ENGLISH_ONLY);
           toggleSortPlaylistByEnglishOnly.checked = Boolean(enabled);
-        } 
+        }
         catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
@@ -294,7 +295,7 @@ export class Yup {
           if (enabled) {
             sortPlaylistSidebar();
           }
-        } 
+        }
         catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
@@ -313,7 +314,7 @@ export class Yup {
           const enabled = Boolean(setting);
           toggleSortSaveToPlaylistDialog.checked = enabled;
           await this.updateSortSaveToPlaylistDialog(enabled);
-        } 
+        }
         catch (err) {
           YuLogService.error(`Error loading setting: ${err}`);
         }
@@ -333,7 +334,7 @@ export class Yup {
         enabled
       );
       YuLogService.log(`Sort Playlist by English only setting saved: ${enabled}`);
-    } 
+    }
     catch (err) {
       YuLogService.error(`Error saving setting: ${err}`);
     }
@@ -347,7 +348,7 @@ export class Yup {
         enabled ? sortPlaylistSidebar : undefined
       );
       YuLogService.log(`Sort Playlist Sidebar setting saved: ${enabled}`);
-    } 
+    }
     catch (err) {
       YuLogService.error(`Error saving setting: ${err}`);
     }
@@ -363,14 +364,14 @@ export class Yup {
             sortSaveToPlaylistDialog();
           }, this.UPDATE_INTERVAL_MS_LONG);
         }
-      } 
+      }
       else {
         if (this.sortPlaylistDialogIntervalId) {
           clearInterval(this.sortPlaylistDialogIntervalId);
           this.sortPlaylistDialogIntervalId = undefined;
         }
       }
-    } 
+    }
     catch (err) {
       YuLogService.error(`Error saving setting: ${err}`);
     }
@@ -450,17 +451,28 @@ export class Yup {
 
     const sortPlaylistButton = panel.querySelector(YupSelectorsById.SORT_PLAYLIST_BUTTON) as HTMLButtonElement | null;
     const sortOptionsMenu = panel.querySelector(YupSelectorsById.SORT_PLAYLIST_OPTIONS) as HTMLDivElement | null;
-    if (!sortPlaylistButton || !sortOptionsMenu) return;
-
+    const closeOpenIcon = sortPlaylistButton?.querySelector(YupSelectorsByClassName.BUTTON_CLOSE_OPEN_ICON) as HTMLSpanElement | null;
+    
+    if (!sortPlaylistButton || !sortOptionsMenu || !closeOpenIcon) return;
+    
     sortPlaylistButton.addEventListener("click", () => {
       sortOptionsMenu.classList.toggle(YuNamesClasses.YU_HIDDEN);
+      if (sortOptionsMenu.classList.contains(YuNamesClasses.YU_HIDDEN)) {
+        closeOpenIcon.textContent = "➕";
+      } 
+      else {
+        closeOpenIcon.textContent = "➖";
+      }
     });
 
     const sortOptions: { selector: string; sortType: YuSortPlaylistTypes }[] = [
+      { selector: YupSelectorsById.SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_DEFAULT_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_ASC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_DESC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_ARTIST_AND_TITLE_DESC },
+      { selector: YupSelectorsById.SORT_PLAYLIST_SONG_TITLE_DEFAULT_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_TITLE_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_TITLE_ASC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_TITLE_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_TITLE_DESC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_TITLE_DESC },
+      { selector: YupSelectorsById.SORT_PLAYLIST_SONG_LENGTH_DEFAULT_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_LENGTH_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_LENGTH_ASC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_LENGTH_ASC },
       { selector: YupSelectorsById.SORT_PLAYLIST_SONG_LENGTH_DESC_OPTION, sortType: YuSortPlaylistTypes.BY_SONG_LENGTH_DESC },
     ];
@@ -470,7 +482,6 @@ export class Yup {
       optionButton?.addEventListener("click", () => {
         sortPlaylist(sortType);
         showToastOverElement(ToastTypes.PLAYLIST_SORT, panel);
-        sortOptionsMenu.classList.add(YuNamesClasses.YU_HIDDEN);
       });
     });
   }

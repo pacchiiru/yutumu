@@ -13,11 +13,14 @@ export const YupSelectorsById = {
     SETTINGS_BUTTON: "#yu-id-settings-button",
     SORT_PLAYLIST_BUTTON: "#yu-id-sort-playlist-button",
     SORT_PLAYLIST_OPTIONS: "#yu-id-yup-sort-playlist-options",
+    SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_DEFAULT_OPTION: "#yu-id-yup-sort-playlist-artist-and-song-title-default-option",
     SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_ASC_OPTION: "#yu-id-yup-sort-playlist-artist-and-song-title-asc-option",
     SORT_PLAYLIST_ARTIST_AND_SONG_TITLE_DESC_OPTION: "#yu-id-yup-sort-playlist-artist-and-song-title-desc-option",
-    SORT_PLAYLIST_SONG_TITLE_ASC_OPTION: "#yu-id-yup-sort-playlist-song-title-asc-option",
-    SORT_PLAYLIST_SONG_TITLE_DESC_OPTION: "#yu-id-yup-sort-playlist-song-title-desc-option",
+    SORT_PLAYLIST_SONG_LENGTH_DEFAULT_OPTION: "#yu-id-yup-sort-playlist-song-length-default-option",
     SORT_PLAYLIST_SONG_LENGTH_ASC_OPTION: "#yu-id-yup-sort-playlist-song-length-asc-option",
     SORT_PLAYLIST_SONG_LENGTH_DESC_OPTION: "#yu-id-yup-sort-playlist-song-length-desc-option",
+    SORT_PLAYLIST_SONG_TITLE_DEFAULT_OPTION: "#yu-id-yup-sort-playlist-song-title-default-option",
+    SORT_PLAYLIST_SONG_TITLE_ASC_OPTION: "#yu-id-yup-sort-playlist-song-title-asc-option",
+    SORT_PLAYLIST_SONG_TITLE_DESC_OPTION: "#yu-id-yup-sort-playlist-song-title-desc-option",
     YUP: "#yu-id-yup"
 } as const;

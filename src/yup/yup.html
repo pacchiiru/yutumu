@@ -30,15 +30,34 @@
         <div class="yu-cl-yup-button-group">
           <div class="yu-cl-yup-dropdown">
             <button id="yu-id-sort-playlist-button" class="yu-cl-yup-button" title="Sort Playlist">
-              <span class="yu-cl-icon">🔀</span> Sort Playlist
+              <div class="yu-cl-button-content">
+                <span class="yu-cl-icon">🔀</span> Sort Playlist
+              </div>
+              <span class="yu-cl-button-close-open-icon">➕</span>
             </button>
             <div id="yu-id-yup-sort-playlist-options" class="yu-cl-yup-dropdown-options yu-cl-hidden">
-              <button id="yu-id-yup-sort-playlist-artist-and-song-title-asc-option" class="yu-cl-yup-dropdown-option">Artist + Song Title ↑</button>
-              <button id="yu-id-yup-sort-playlist-artist-and-song-title-desc-option" class="yu-cl-yup-dropdown-option">Artist + Song Title ↓</button>
-              <button id="yu-id-yup-sort-playlist-song-title-asc-option" class="yu-cl-yup-dropdown-option">Song Title ↑</button>
-              <button id="yu-id-yup-sort-playlist-song-title-desc-option" class="yu-cl-yup-dropdown-option">Song Title ↓</button>
-              <button id="yu-id-yup-sort-playlist-song-length-asc-option" class="yu-cl-yup-dropdown-option">Song Length ↑</button>
-              <button id="yu-id-yup-sort-playlist-song-length-desc-option" class="yu-cl-yup-dropdown-option">Song Length ↓</button>
+              <div class="yu-cl-yup-dropdown-grid">
+                <button id="yu-id-yup-sort-playlist-artist-and-song-title-default-option" class="yu-cl-yup-dropdown-label">
+                  Artist, then Song Title
+                  <span class="yu-cl-yup-dropdown-label-tooltip">Sort playlist songs first by artist, then by song title within each artist group.</span>
+                </button>
+                <button id="yu-id-yup-sort-playlist-artist-and-song-title-asc-option" class="yu-cl-yup-dropdown-arrow">⬆️</button>
+                <button id="yu-id-yup-sort-playlist-artist-and-song-title-desc-option" class="yu-cl-yup-dropdown-arrow">⬇️</button>
+          
+                <button id="yu-id-yup-sort-playlist-song-length-default-option" class="yu-cl-yup-dropdown-label">
+                  Song Length
+                  <span class="yu-cl-yup-dropdown-label-tooltip">Sort playlist songs by track length.</span>
+                </button>
+                <button id="yu-id-yup-sort-playlist-song-length-asc-option" class="yu-cl-yup-dropdown-arrow">⬆️</button>
+                <button id="yu-id-yup-sort-playlist-song-length-desc-option" class="yu-cl-yup-dropdown-arrow">⬇️</button>
+          
+                <button id="yu-id-yup-sort-playlist-song-title-default-option" class="yu-cl-yup-dropdown-label">
+                  Song Title
+                  <span class="yu-cl-yup-dropdown-label-tooltip">Sort playlist songs by title.</span>
+                </button>
+                <button id="yu-id-yup-sort-playlist-song-title-asc-option" class="yu-cl-yup-dropdown-arrow">⬆️</button>
+                <button id="yu-id-yup-sort-playlist-song-title-desc-option" class="yu-cl-yup-dropdown-arrow">⬇️</button>
+              </div>
             </div>
           </div>
         </div>
@@ -74,7 +93,7 @@
         <div class="yu-cl-setting-item">
           <label for="yu-id-setting-sort-save-to-playlist-dialog" class="yu-cl-setting-label">
             Sort "Save to playlist" dialog
-            <span class="yu-cl-setting-tooltip">Sorts playlists in the "Save to Playlist" popup alphabetically.</span>
+            <span class="yu-cl-setting-tooltip">Sorts playlists in the "Save to Playlist" dialog alphabetically.</span>
           </label>
           <input type="checkbox" id="yu-id-setting-sort-save-to-playlist-dialog" class="yu-cl-setting-toggle" />
         </div>
