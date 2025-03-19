@@ -50,18 +50,20 @@
 }
 
 .yu-cl-yup-dropdown-arrow {
-    background: none;
+    background: #eaeaea;
+    border-radius: 0.4rem;
     border: none;
     cursor: pointer;
     font-family: 'DidactGothic-Regular', sans-serif;
     font-size: 2.0rem;
     padding-inline: 0;
     text-align: center;
-    transition: transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .yu-cl-yup-dropdown-arrow:hover {
-    transform: scale(1.1);
+    background: #dfdfdf;
+    transform: scale(1.05);
 }
 
 .yu-cl-yup-dropdown-label-tooltip {
