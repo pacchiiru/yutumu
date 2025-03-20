@@ -1,10 +1,10 @@
-# Yutumu
+# yutumu
 
-![Yutumu Banner](assets/images/banner_small_cropped.webp)
+![yutumu Banner](assets/images/banner_small_cropped.webp)
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-Yutumu is a Chrome extension that enhances **YouTube Music** with features to simplify playlist management.
+yutumu is a Chrome extension that enhances **YouTube Music** with features to simplify playlist management.
 
 ## Table of Contents
 
@@ -20,19 +20,19 @@ Yutumu is a Chrome extension that enhances **YouTube Music** with features to si
 
 ## Background
 
-**Yutumu** streamlines playlist management on **YouTube Music**. While YouTube Music is awesome for letting users save a variety of YouTube-exclusive content into playlists, such as covers, remixes, and instrumentals, its built-in management tools are somewhat limited.
+**yutumu** streamlines playlist management on **YouTube Music**. While YouTube Music is awesome for letting users save a variety of YouTube-exclusive content into playlists, such as covers, remixes, and instrumentals, its built-in management tools are somewhat limited.
 
 Take sorting, for example. As of February 2025, YouTube Music offers only three sorting options: Manual, Newest first, and Newest last. For users with extensive playlists, manually rearranging hundreds of songs to achieve a different order (like alphabetical) can be both **time-consuming** and **tedious**.
 
-To overcome this limitation, **Yutumu** introduces advanced sorting features that allow you to organize songs by artist, title, or length. The extension automatically reorders the songs in the **DOM**, so you only need to drag and drop each track to finalize the new arrangement.
+To overcome this limitation, **yutumu** introduces advanced sorting features that allow you to organize songs by artist, title, or length. The extension automatically reorders the songs in the **DOM**, so you only need to drag and drop each track to finalize the new arrangement.
 
-For a comprehensive overview of Yutumu’s vision, please see our [Roadmap](#roadmap).
+For a comprehensive overview of yutumu’s vision, please see our [Roadmap](#roadmap).
 
 > **Note:** This is an **unofficial** extension and is *not* affiliated with or endorsed by YouTube or Google.
 
 ## Install
 
-To add Yutumu to your Chrome browser as a local extension:
+To add yutumu to your Chrome browser as a local extension:
 
 1. Clone or download the repository:
     ```sh
@@ -50,33 +50,33 @@ To add Yutumu to your Chrome browser as a local extension:
 4. Open Google Chrome and visit the Extensions page by typing `chrome://extensions` in the address bar.
 5. Enable **Developer mode** by toggling the switch at the top-right of the page.
 6. Click the **Load unpacked** button at the top-left.
-7. Select the generated **dist** folder within the Yutumu repository.
-8. Yutumu will now appear in your list of Chrome extensions.
+7. Select the generated **dist** folder within the yutumu repository.
+8. yutumu will now appear in your list of Chrome extensions.
 
-![Yutumu Banner](assets/gifs/muu_excited.gif)
+![yutumu Banner](assets/gifs/muu_excited.gif)
 
 ## Usage
 
 1. Install the extension in Developer Mode (see [Install](#install)).
 2. Visit any YouTube Music playlist page.
-3. Drag the Yutumu panel by the titlebar to reposition it.
-4. Drag the Yutumu panel by its edges to resize it.
+3. Drag the yutumu panel by the titlebar to reposition it.
+4. Drag the yutumu panel by its edges to resize it.
 5. Click the **⚙** Settings button to change various settings and smaller page features.
 6. Click the **❔** Help button for help.
-7. Click the **➖** Minimize button to move the Yutumu panel out of the way.
-8. Click the **✖** Close button to close the Yutumu panel (can be reopened from the extension popup).
+7. Click the **➖** Minimize button to move the yutumu panel out of the way.
+8. Click the **✖** Close button to close the yutumu panel (can be reopened from the extension popup).
 9. Click the **Sort Playlist** button to sort the playlist by one of the dropdown options.
 10. Drag and drop each song in-place to save the new ordering (the border around the song will disappear).
 
-![Yutumu Banner](assets/screenshots/yutumu_preview_1.gif)
+![yutumu Banner](assets/screenshots/yutumu_preview_1.gif)
 
-![Yutumu Banner](assets/screenshots/yutumu_preview_2.png)
+![yutumu Banner](assets/screenshots/yutumu_preview_2.png)
 
-![Yutumu Banner](assets/screenshots/yutumu_preview_3.png)
+![yutumu Banner](assets/screenshots/yutumu_preview_3.png)
 
 ## Security
 
-Yutumu does **not** share, sell, or transmit your data to any external servers. If you have **any** concerns, **please do not install** the extension.
+yutumu does **not** share, sell, or transmit your data to any external servers. If you have **any** concerns, **please do not install** the extension.
 
 ## Roadmap
 
@@ -119,7 +119,7 @@ Planned features include:
 - **Help & Tutorials**
   - Integrate Intro.js guided tours accessible through the help button
 
-![Yutumu Banner](assets/gifs/muu_huh.gif)
+![yutumu Banner](assets/gifs/muu_huh.gif)
 
 ## Maintainers
 
@@ -135,7 +135,7 @@ Special thanks to:
 - [VOICEVOX:満別花丸](https://voicevox.hiroshiba.jp/)
 - [YouTube Music](https://music.youtube.com/)
 
-![Yutumu Banner](assets/gifs/muu_happy.gif)
+![yutumu Banner](assets/gifs/muu_happy.gif)
 
 ## Contributing
 

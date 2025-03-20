@@ -12,13 +12,13 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YupSelectorsById.YUP,
                     muuStepStart: MuuSteps.HAPPY,
-                    intro: "Welcome to Yutumu!",
+                    intro: "Welcome to yutumu!",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
                     element: YupSelectorsById.YUP,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "My name is Muu, and my job is to help operate Yutumu for you, moo.",
+                    intro: "My name is Muu, and my job is to help operate yutumu for you, moo.",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
@@ -36,13 +36,13 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YupSelectorsById.YUP,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "So, allow me to show you around Yutumu just a little bit, moo.",
+                    intro: "So, allow me to show you around yutumu just a little bit, moo.",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
                     element: YupSelectorsById.YUP,
                     muuStepStart: MuuSteps.HAPPY,
-                    intro: "This popup here is the Yutumu panel. You can resize it by dragging at the edges.",
+                    intro: "This popup here is the yutumu panel. You can resize it by dragging at the edges.",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
@@ -60,7 +60,7 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YupSelectorsById.SETTINGS_BUTTON,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "This is the ⚙ Settings button. You can change various Yutumu settings and smaller page features here moo.",
+                    intro: "This is the ⚙ Settings button. You can change various yutumu settings and smaller page features here moo.",
                     position: IntroJsPositions.BOTTOM,
                 },
                 {
@@ -84,7 +84,7 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YupSelectorsById.CLOSE_BUTTON,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "But if you change your mind, you can just reopen the Yutumu panel from the Extensions menu, moo.",
+                    intro: "But if you change your mind, you can just reopen the yutumu panel from the Extensions menu, moo.",
                     position: IntroJsPositions.BOTTOM,
                 },
                 {

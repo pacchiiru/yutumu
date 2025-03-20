@@ -1,5 +1,5 @@
 {
-  "name": "Yutumu",
+  "name": "yutumu",
   "description": "Enhances YouTube Music.",
   "version": "0.2.0",
   "manifest_version": 3,
@@ -23,7 +23,7 @@
   ],
   "action": {
     "default_popup": "yue.html",
-    "default_title": "Yutumu"
+    "default_title": "yutumu"
   },
   "web_accessible_resources": [
     {
