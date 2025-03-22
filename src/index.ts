@@ -2,12 +2,6 @@ __webpack_public_path__ = chrome.runtime.getURL('');
 // ======================================================================================================================
 // TYPECRIPT
 // ----------------------------------------
-// Common
-// ----------------------------------------
-import './common/sort-playlist-sidebar';
-import './common/sort-playlist';
-import './common/toast';
-// ----------------------------------------
 // Const
 // ----------------------------------------
 import './const/html-attributes';
@@ -16,6 +10,7 @@ import './const/muu-sounds';
 import './const/muu-steps';
 import './const/toast-messages';
 import './const/toast-types';
+import './const/update-intervals';
 import './const/yt-selectors';
 import './const/yt-url-patterns';
 import './const/yu-chrome-actions';
@@ -38,6 +33,8 @@ import './models/tutorial';
 // ----------------------------------------
 import './services/yu-chrome-storage-service';
 import './services/yu-log-service';
+import './services/yu-sort-service';
+import './services/yu-toast-service';
 import './services/yup-color-service';
 // ----------------------------------------
 // Utils
@@ -63,9 +60,12 @@ import 'intro.js/introjs.css';
 // ----------------------------------------
 // Common
 // ----------------------------------------
-import './common/sort-playlist.css';
-import './common/toast.css';
 import './common/yu.css';
+// ----------------------------------------
+// Services
+// ----------------------------------------
+import './services/sort-playlist.css';
+import './services/toast.css';
 // ----------------------------------------
 // Intro
 // ----------------------------------------

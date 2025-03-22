@@ -1,7 +1,7 @@
-import { YtSelectors } from '../const/yt-selectors';
-import { YtUrlPatterns } from '../const/yt-url-patterns';
 import { IntroJsPositions } from '../const/intro-js-positions';
 import { MuuSteps } from '../const/muu-steps';
+import { YtSelectors } from '../const/yt-selectors';
+import { YtUrlPatterns } from '../const/yt-url-patterns';
 import { YupSelectorsById } from '../const/yup-selectors-by-id';
 import { TutorialQueue } from '../models/tutorial-queue';
 
@@ -30,7 +30,7 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YupSelectorsById.YUP,
                     muuStepStart: MuuSteps.EXCITED,
-                    intro: "But I love muu-sic, so making your experience better (and listening in) isn't so bad, moo!",
+                    intro: "But I love muu-sic, so making your experience better isn't so bad, moo!",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
@@ -93,7 +93,7 @@ export const tutorialQueue: TutorialQueue = {
                 },
             ],
             urlRegex: YtUrlPatterns.HOME
-        },
+        }
     ],
     playlist: [
         {
@@ -142,12 +142,6 @@ export const tutorialQueue: TutorialQueue = {
                 },
                 {
                     element: YtSelectors.PLAYLIST_CONTROLS,
-                    muuStepStart: MuuSteps.NORMAL,
-                    intro: "To recap: to save the newly sorted playlist, you'll have to drag and drop each song in-place.",
-                    position: IntroJsPositions.RIGHT,
-                },
-                {
-                    element: YtSelectors.PLAYLIST_CONTROLS,
                     muuStepStart: MuuSteps.BWEH,
                     intro: "I know that's still a bit of work left for you, user...",
                     position: IntroJsPositions.RIGHT,
@@ -155,7 +149,7 @@ export const tutorialQueue: TutorialQueue = {
                 {
                     element: YtSelectors.PLAYLIST_CONTROLS,
                     muuStepStart: MuuSteps.NORMAL,
-                    intro: "But currently its a better solution that doing everything completely manually, moo.",
+                    intro: "But, it should still save you a lot of time moo.",
                     position: IntroJsPositions.RIGHT,
                 },
                 {
@@ -166,6 +160,6 @@ export const tutorialQueue: TutorialQueue = {
                 }
             ],
             urlRegex: YtUrlPatterns.PLAYLIST
-        },
+        }
     ]
 };

@@ -1,31 +1,28 @@
 import interact from 'interactjs';
 
+import { ToastTypes } from '../const/toast-types';
+import { UpdateIntervals } from '../const/update-intervals';
 import { YtSelectors } from '../const/yt-selectors';
 import { YtUrlPatterns } from '../const/yt-url-patterns';
-import { YuNamesAnimations } from '../const/yu-names-animations';
-import { YuNamesClasses } from '../const/yu-names-classes';
 import { YuChromeActions } from '../const/yu-chrome-actions';
 import { YuChromeSettings } from '../const/yu-chrome-settings';
+import { YuNamesAnimations } from '../const/yu-names-animations';
+import { YuNamesClasses } from '../const/yu-names-classes';
+import { YuSortPlaylistTypes } from '../const/yu-sort-playlist-types';
 import { YupConstants } from '../const/yup-constants';
 import { YupSelectorsByClassName } from '../const/yup-selectors-by-class-name';
 import { YupSelectorsById } from '../const/yup-selectors-by-id';
-import { ToastTypes } from '../const/toast-types';
-import { YuSortPlaylistTypes } from '../const/yu-sort-playlist-types';
 import { yuChromeStorageService } from '../services/yu-chrome-storage-service';
-import { yupColorService } from '../services/yup-color-service';
 import { YuLogService } from '../services/yu-log-service';
+import { yuSortService } from '../services/yu-sort-service';
+import { yuToastService } from '../services/yu-toast-service';
+import { yupColorService } from '../services/yup-color-service';
 import { DomUtils } from '../utils/dom-utils';
 import { SvgUtils } from '../utils/svg-utils';
-import { sortPlaylist } from '../common/sort-playlist';
-import { sortPlaylistSidebar } from '../common/sort-playlist-sidebar';
-import { sortSaveToPlaylistDialog } from '../common/sort-save-to-playlist-dialog';
 import { startTutorial } from '../yu-intro/yu-intro';
-import { showToastOverElement } from '../common/toast';
 import yupTemplate from './yup.html';
 
 export class Yup {
-  private UPDATE_INTERVAL_MS_SHORT: number = 1000;
-  private UPDATE_INTERVAL_MS_LONG: number = 2000;
   private sortPlaylistDialogIntervalId?: number;
   private yupId: string = "yu-id-yup";
   private yupElement: HTMLElement | null = null;
@@ -51,14 +48,14 @@ export class Yup {
 
       setInterval(() => {
         yup.updateContext();
-      }, yup.UPDATE_INTERVAL_MS_SHORT);
+      }, UpdateIntervals.MS_SHORT);
 
       setInterval(() => {
         const panelElement = yup.requireYupElement();
         if (panelElement) {
           yupColorService.updateYupBorder(panelElement);
         }
-      }, yup.UPDATE_INTERVAL_MS_LONG);
+      }, UpdateIntervals.MS_LONG);
 
     };
 
@@ -237,7 +234,7 @@ export class Yup {
 
     panel.addEventListener("animationend", function openHandler(e: AnimationEvent) {
       if (e.animationName === YuNamesAnimations.YUP_OPEN) {
-        showToastOverElement(ToastTypes.OPEN, panel);
+        yuToastService.showToastOverElement(ToastTypes.OPEN, panel);
         panel.removeEventListener("animationend", openHandler);
         panel.classList.remove(YuNamesClasses.YUP_OPENING);
       }
@@ -293,7 +290,7 @@ export class Yup {
           const enabled = await yuChromeStorageService.getSetting<boolean>(YuChromeSettings.SORT_PLAYLIST_SIDEBAR);
           toggleSortSidebar.checked = Boolean(enabled);
           if (enabled) {
-            sortPlaylistSidebar();
+            yuSortService.sortPlaylistSidebar();
           }
         }
         catch (err) {
@@ -345,7 +342,7 @@ export class Yup {
       await yuChromeStorageService.setSetting(
         YuChromeSettings.SORT_PLAYLIST_SIDEBAR,
         enabled,
-        enabled ? sortPlaylistSidebar : undefined
+        enabled ? yuSortService.sortPlaylistSidebar : undefined
       );
       YuLogService.log(`Sort Playlist Sidebar setting saved: ${enabled}`);
     }
@@ -361,8 +358,8 @@ export class Yup {
       if (enabled) {
         if (!this.sortPlaylistDialogIntervalId) {
           this.sortPlaylistDialogIntervalId = window.setInterval(() => {
-            sortSaveToPlaylistDialog();
-          }, this.UPDATE_INTERVAL_MS_LONG);
+            yuSortService.sortSaveToPlaylistDialog();
+          }, UpdateIntervals.MS_LONG);
         }
       }
       else {
@@ -401,7 +398,7 @@ export class Yup {
 
       panel.style.setProperty("--initial-transform", computedStyle.transform);
       panel.classList.add(YuNamesClasses.YUP_MINIMIZING_OUT);
-      showToastOverElement(ToastTypes.MINIMIZE, panel);
+      yuToastService.showToastOverElement(ToastTypes.MINIMIZE, panel);
 
       panel.addEventListener("animationend", function outHandler(e: AnimationEvent) {
         if (e.animationName === YuNamesAnimations.YUP_MINIMIZE_OUT) {
@@ -436,7 +433,7 @@ export class Yup {
     closeButton.addEventListener("click", () => {
       const computedStyle = window.getComputedStyle(panel);
       panel.style.setProperty("--initial-transform", computedStyle.transform);
-      showToastOverElement(ToastTypes.CLOSE, panel);
+      yuToastService.showToastOverElement(ToastTypes.CLOSE, panel);
       panel.classList.add(YuNamesClasses.YUP_CLOSING);
 
       panel.addEventListener("animationend", () => {
@@ -480,8 +477,8 @@ export class Yup {
     sortOptions.forEach(({ selector, sortType }) => {
       const optionButton = panel.querySelector(selector);
       optionButton?.addEventListener("click", () => {
-        sortPlaylist(sortType);
-        showToastOverElement(ToastTypes.PLAYLIST_SORT, panel);
+        yuSortService.sortPlaylist(sortType);
+        yuToastService.showToastOverElement(ToastTypes.PLAYLIST_SORT, panel);
       });
     });
   }
